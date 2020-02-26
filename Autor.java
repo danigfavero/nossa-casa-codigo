@@ -79,14 +79,6 @@ class Autor {
             System.out.println(e.getMessage());
         }
 
-        try {
-            autores.add(new Autor());
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-
         for (Autor autor : autores) {
             System.out.println(autor);
         }
