@@ -3,12 +3,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 
-class Autor {
+public class Autor {
 
-    String nome;
-    String email;
-    String descricao;
-    LocalDateTime instante;
+    private String nome;
+    private String email;
+    private String descricao;
+    private LocalDateTime instante;
 
     public Autor(String nome, String email, String descricao) {
         this.nome = nome;
