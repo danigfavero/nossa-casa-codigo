@@ -1,3 +1,5 @@
+package casaDoCodigo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -43,24 +45,32 @@ public class Autor {
         return !comparador.matches();
     }
     
-    private boolean descricaoInvalida(String descricao) {
+    public String getNome() {
+		return this.nome;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+    
+    public String getDescricao() {
+		return this.descricao;
+	}
+
+	private boolean descricaoInvalida(String descricao) {
         if (descricao == null || descricao.equals("")) {
             return true;
         }
         return descricao.length() > 400;
     }
 
-    public String getEmail() {
-		return this.email;
-	}
-
     @Override
     public String toString() {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String dataFormatada = this.instante.format(formatador);
-        return "Autor: " + this.nome 
+        return "Autor: " + this.getNome() 
                + "\nEmail: " + this.getEmail()
-               + "\nDescrição: " + this.descricao
+               + "\nDescrição: " + this.getDescricao()
                + "\nCadastro feito em " + dataFormatada;
     }   
     
@@ -134,4 +144,5 @@ public class Autor {
         }
         
     }
+
 }
