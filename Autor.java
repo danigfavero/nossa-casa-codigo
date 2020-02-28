@@ -47,17 +47,17 @@ public class Autor {
     
     public String getNome() {
 		return this.nome;
-	}
+	  }
 
-	public String getEmail() {
-		return this.email;
-	}
+	  public String getEmail() {
+		  return this.email;
+	  }
     
     public String getDescricao() {
-		return this.descricao;
-	}
+		  return this.descricao;
+	  }
 
-	private boolean descricaoInvalida(String descricao) {
+    private boolean descricaoInvalida(String descricao) {
         if (descricao == null || descricao.equals("")) {
             return true;
         }
@@ -136,6 +136,48 @@ public class Autor {
         try {
             autores.add(new Autor("Descrição Vazia", "a@b.com", ""));
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            autores.add(new Autor("", "a@b.com", "nome vazio"));
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            autores.add(new Autor(null, "a@b.com", "nome nulo"));
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            autores.add(new Autor("zé", "", "email vazio"));
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            autores.add(new Autor("ana", null, "email nulo"));
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            autores.add(new Autor("Descrição Nula", "a@b.com", null));
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            autores.add(new Autor("Descrição Vazia", "a@b.com", ""));
+        }
+        catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
