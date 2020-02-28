@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 
 public class Autor {
-    /* documentação */
 
     private String nome;
     private String email;
@@ -43,10 +42,6 @@ public class Autor {
         java.util.regex.Matcher comparador = padrao.matcher(email);
         return !comparador.matches();
     }
-
-    public String getEmail() {
-		return this.email;
-	}
     
     private boolean descricaoInvalida(String descricao) {
         if (descricao == null || descricao.equals("")) {
@@ -55,16 +50,20 @@ public class Autor {
         return descricao.length() > 400;
     }
 
+    public String getEmail() {
+		return this.email;
+	}
+
     @Override
     public String toString() {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String dataFormatada = this.instante.format(formatador);
         return "Autor: " + this.nome 
-               + "\nEmail: " + this.email
+               + "\nEmail: " + this.getEmail()
                + "\nDescrição: " + this.descricao
                + "\nCadastro feito em " + dataFormatada;
-    }    
-
+    }   
+    
     public static void main(String[] args) {
 
         LinkedList<Autor> autores = new LinkedList<>();
