@@ -1,3 +1,5 @@
+package casaDoCodigo;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -6,7 +8,7 @@ public class Autores extends LinkedList<Autor> {
     @Override
 	public void add(int index, Autor autor) {
 		for (Autor a : this) {
-            if (emailsIguais(autor, a))
+            if (a.equals(autor))
                 throw new IllegalArgumentException("Email duplicado");
 		}
 		super.add(index, autor);
@@ -15,7 +17,7 @@ public class Autores extends LinkedList<Autor> {
 	@Override
 	public boolean add(Autor autor) {
 		for (Autor a : this) {
-            if (emailsIguais(autor, a))
+            if (a.equals(autor))
                 throw new IllegalArgumentException("Email duplicado");
 		}
 		return super.add(autor);
@@ -35,11 +37,6 @@ public class Autores extends LinkedList<Autor> {
 			this.add(autor);
 		}
 		return true;
-	}
-	
-	
-	private static boolean emailsIguais(Autor autor1, Autor autor2) {
-		return autor1.getEmail().equals(autor2.getEmail());
 	}
     
     public static void main(String[] args) {
