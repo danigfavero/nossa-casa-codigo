@@ -145,48 +145,6 @@ public class Autor {
             System.out.println(e.getMessage());
         }
 
-        try {
-            autores.add(new Autor("", "a@b.com", "nome vazio"));
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor(null, "a@b.com", "nome nulo"));
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("zé", "", "email vazio"));
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("ana", null, "email nulo"));
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("Descrição Nula", "a@b.com", null));
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("Descrição Vazia", "a@b.com", ""));
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
         for (Autor autor : autores) {
             System.out.println(autor);
         }
