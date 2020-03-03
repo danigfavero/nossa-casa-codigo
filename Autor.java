@@ -1,3 +1,5 @@
+package casaDoCodigo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -49,32 +51,48 @@ public class Autor {
         }
         return descricao.length() > 400;
     }
+    
+    public String getNome() {
+		return this.nome;
+	}
 
+	public String getEmail() {
+		return this.email;
+	}
+    
+    public String getDescricao() {
+		return this.descricao;
+	}
+
+	@Override
+	public boolean equals(Object outroAutor) {
+		Autor autor = (Autor) outroAutor;
+		return this.getEmail().equals(autor.getEmail());
+	}
+	
     @Override
     public String toString() {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String dataFormatada = this.instante.format(formatador);
-        return "Autor: " + this.nome 
-               + "\nEmail: " + this.email
-               + "\nDescrição: " + this.descricao
+        return "Autor: " + this.getNome() 
+               + "\nEmail: " + this.getEmail()
+               + "\nDescrição: " + this.getDescricao()
                + "\nCadastro feito em " + dataFormatada;
-    }    
-
+    }   
+    
     public static void main(String[] args) {
 
         LinkedList<Autor> autores = new LinkedList<>();
 
         try {
             autores.add(new Autor("Joao", "joao@email.com", "formado na puc"));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             autores.add(new Autor("Juca", "aaaaa", "especialista"));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
@@ -87,50 +105,43 @@ public class Autor {
                                 + "descricao longa descricao longa descricao longa descricao longa "
                                 + "descricao longa descricao longa descricao longa descricao longa "
                                 + "descricao longa "));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             autores.add(new Autor("", "a@b.com", "nome vazio"));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             autores.add(new Autor(null, "a@b.com", "nome nulo"));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             autores.add(new Autor("zé", "", "email vazio"));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             autores.add(new Autor("ana", null, "email nulo"));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             autores.add(new Autor("Descrição Nula", "a@b.com", null));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         try {
             autores.add(new Autor("Descrição Vazia", "a@b.com", ""));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
@@ -139,4 +150,5 @@ public class Autor {
         }
         
     }
+
 }
