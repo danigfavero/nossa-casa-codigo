@@ -36,27 +36,4 @@ public class Autores extends LinkedList<Autor> {
 		}
 		return true;
 	}
-    
-    public static void main(String[] args) {
-    	
-        LinkedList<Autor> autores = new Autores();
-        StringBuilder email = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            email.append("a");
-            Autor autor = new Autor("nome", email.toString() + "@email.com", "descrição");
-            autores.add(autor);
-        }
-
-        try {
-            Autor autor = new Autor("nome", "a@email.com", "descrição");
-            autores.add(autor);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-	    for (Autor autor : autores) {
-	        System.out.println(autor);
-	    }
-        
-    }
 }
