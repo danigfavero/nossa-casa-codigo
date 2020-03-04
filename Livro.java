@@ -107,13 +107,33 @@ public class Livro {
 	public Categoria getCategoria() {
 		return this.categoria;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
+	}
 	
 	@Override
-	public boolean equals (Object outroLivro) {
-		Livro livro = (Livro) outroLivro;
+	public boolean equals (Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Livro livro = (Livro) obj;
 		boolean tituloIgual = this.titulo.equals(livro.titulo);
 		boolean isbnIgual = this.isbn.equals(livro.isbn);
 		return tituloIgual && isbnIgual;
-	}	
+	}
+	
+	
 	
 }
