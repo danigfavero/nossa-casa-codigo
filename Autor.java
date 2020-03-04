@@ -43,6 +43,18 @@ public class Autor {
         return !comparador.matches();
     }
     
+    public String getNome() {
+		return this.nome;
+	  }
+
+	  public String getEmail() {
+		  return this.email;
+	  }
+    
+    public String getDescricao() {
+		  return this.descricao;
+	  }
+
     private boolean descricaoInvalida(String descricao) {
         if (descricao == null || descricao.equals("")) {
             return true;
@@ -104,6 +116,7 @@ public class Autor {
                                 + "descricao longa descricao longa descricao longa descricao longa "
                                 + "descricao longa "));
         } catch (IllegalArgumentException e) {
+
             System.out.println(e.getMessage());
         }
 
@@ -140,8 +153,6 @@ public class Autor {
         try {
             autores.add(new Autor("Descrição Vazia", "a@b.com", ""));
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
 
         for (Autor autor : autores) {
             System.out.println(autor);
