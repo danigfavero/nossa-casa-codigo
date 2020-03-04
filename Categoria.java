@@ -12,10 +12,18 @@ public class Categoria {
 		return this.nome;
 	}
 	
-	@Override
-	public boolean equals(Object categoria) {
-		Categoria outraCategoria = (Categoria) categoria;
-		return this.getNome().equals(outraCategoria.getNome());
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Categoria other = (Categoria) obj;
+		return this.getNome().equals(other.getNome());
 	}
 	
 	@Override
