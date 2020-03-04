@@ -1,46 +1,53 @@
-package casaDoCodigo;
-
-import java.util.LinkedList;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TesteCategoria {
-	@Test
-	public void testeCategoria() {
-		LinkedList<Categoria> categorias = new Categorias();
-        StringBuilder nome = new StringBuilder();
+	
+	private Categorias categorias;
+	
+	public TesteCategoria() {
+		categorias = new Categorias();
+		StringBuilder nome = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             nome.append("a");
-            categorias.add(new Categoria(nome.toString()));
-        }
-
+        	categorias.adiciona(new Categoria(nome.toString()));
+        } 
+	}
+	
+	@Test
+	public void entradaNula() {   
         try {
-        	categorias.add(new Categoria("a"));
+        	categorias.adiciona(new Categoria(null));
+        } catch (IllegalArgumentException e) {
+        	Assertions.assertEquals("Categoria inválida", e.getMessage());
+        }
+	}
+	
+	@Test
+	public void entradaVazia() {
+        try {
+        	categorias.adiciona(new Categoria(""));
+        } catch (IllegalArgumentException e) {
+        	Assertions.assertEquals("Categoria inválida", e.getMessage());
+        }
+	}
+	
+	@Test
+	public void entradaDuplicada() {
+        try {
+        	categorias.adiciona(new Categoria("a"));
         } catch (IllegalArgumentException e) {
             Assertions.assertEquals("Categoria duplicada", e.getMessage());
         }
-
-        nome = new StringBuilder();
-	    for (Categoria categoria : categorias) {
-	    	nome.append("a");
-	        Assertions.assertEquals(nome.toString(), categoria.getNome());
-	    }
-	    
-	    LinkedList<Categoria> categorias2 = new Categorias();
-	    
-	    categorias2.add(new Categoria("aa"));
-	    try {
-	    	categorias2.addAll(0, categorias);
-	    } catch (IllegalArgumentException e) {
-	    	Assertions.assertEquals("Categoria duplicada", e.getMessage());
-	    }
-	    
-	    nome = new StringBuilder();
-	    for (Categoria categoria : categorias2) {
-	    	nome.append("a");
-	    	Assertions.assertEquals(nome.toString(), categoria.getNome());
-	    }
-		
 	}
+
+	@Test
+	public void verificaInsercao() {
+        StringBuilder nome = new StringBuilder();
+	    for (int i = 0; i < 5; i++) {
+	    	nome.append("a");
+	    	Assertions.assertTrue(categorias.contains(new Categoria("a")));
+	    }	
+	}
+	
 }
