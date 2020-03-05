@@ -7,11 +7,6 @@ public class TesteCategoria {
 	
 	public TesteCategoria() {
 		categorias = new Categorias();
-		StringBuilder nome = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            nome.append("a");
-        	categorias.adiciona(new Categoria(nome.toString()));
-        } 
 	}
 	
 	@Test
@@ -43,10 +38,16 @@ public class TesteCategoria {
 
 	@Test
 	public void verificaInsercao() {
-        StringBuilder nome = new StringBuilder();
+		StringBuilder nome = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            nome.append("a");
+        	categorias.adiciona(new Categoria(nome.toString()));
+        } 
+		
+		nome = new StringBuilder();
 	    for (int i = 0; i < 5; i++) {
 	    	nome.append("a");
-	    	Assertions.assertTrue(categorias.contains(new Categoria("a")));
+	    	Assertions.assertTrue(categorias.contains(new Categoria(nome.toString())));
 	    }	
 	}
 	

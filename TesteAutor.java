@@ -7,12 +7,6 @@ public class TesteAutor {
 	
 	public TesteAutor() {
 		autores = new Autores();
-        StringBuilder email = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            email.append("a");
-            Autor autor = new Autor("nome", email.toString() + "@email.com", "descrição");
-            autores.add(autor);
-        }
 	}
 	
 	@Test
@@ -28,10 +22,17 @@ public class TesteAutor {
 	@Test
 	public void verificaInsercao() {
         StringBuilder email = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            email.append("a");
+            Autor autor = new Autor("nome", email.toString() + "@email.com", "descrição");
+            autores.add(autor);
+        }
+        
+        email = new StringBuilder();
 	    for (Autor autor : autores) {
 	    	email.append("a");
 	        Assertions.assertEquals("nome", autor.getNome());
-	        Assertions.assertEquals(email + "@email.com", autor.getEmail());
+	        Assertions.assertEquals(email.toString() + "@email.com", autor.getEmail());
 	        Assertions.assertEquals("descrição", autor.getDescricao());
 	    }
 	}
