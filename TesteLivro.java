@@ -4,11 +4,7 @@ import org.junit.jupiter.api.Test;
 
 public class TesteLivro {
     
-    private static Livros livros;
-    
-    public TesteLivro() {
-        livros = new Livros(); 
-    }    
+    private static Livros livros = new Livros();
     
     @Test
 	public void livroDuplicado() {
@@ -42,7 +38,5 @@ public class TesteLivro {
             Assertions.assertTrue(livros.contains(outro));
 	    }
     }
-    
-    
     
 }

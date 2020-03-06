@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import org.junit.jupiter.api.Assertions;
 
 public class Livro {
 	
@@ -14,66 +15,31 @@ public class Livro {
 	
 	public Livro (String titulo, String resumo, String sumario, float preco,
 				  int paginas, String isbn, LocalDate data, Categoria categoria) {
-		if (tituloInvalido(titulo)) {
-			throw new IllegalArgumentException("Título inválido");
-		}
+		
+		Assertions.assertNotNull(titulo,"Título inválido");
 		this.titulo = titulo;
-		if (resumoInvalido(resumo)) {
-			throw new IllegalArgumentException("Resumo inválido");
-		}
+		
+		Assertions.assertNotNull(resumo,"Resumo inválido");
+		Assertions.assertTrue((resumo.length() <= 500), "Resumo inválido");
 		this.resumo = resumo;
+		
 		this.sumario = sumario;
-		if (precoInvalido(preco)) {
-			throw new IllegalArgumentException("Preço inválido");
-		}
+		
+		Assertions.assertTrue((preco >= 20.0), "Preço inválido");
 		this.preco = preco;
-		if (nPaginasInvalido(paginas)) {
-			throw new IllegalArgumentException("Número de páginas inválido");
-		}
+		
+		Assertions.assertTrue((paginas >= 100), "Número de páginas inválido");
 		this.paginas = paginas;
-		if (isbnInvalido(isbn)) {
-			throw new IllegalArgumentException("Isbn inválido");
-		} 
+		
+		Assertions.assertNotNull(isbn,"Isbn inválido");
 		this.isbn = isbn;
-		if (dataInvalida(data)) {
-			throw new IllegalArgumentException("Data inválida");
-		}
+		
+		Assertions.assertNotNull(data,"Data inválida");
+		Assertions.assertTrue(data.isAfter(LocalDate.now()), "Data inválida");
 		this.dataPublicacao = data;
-		if (categoriaInvalida(categoria)) {
-			throw new IllegalArgumentException("Categoria inválida");
-		}
+		
+		Assertions.assertNotNull(categoria,"Categoria inválida");
 		this.categoria = categoria;
-	}
-	
-	private boolean tituloInvalido (String titulo) {
-		return (titulo == null) || (titulo.equals(""));
-	}
-	
-	private boolean resumoInvalido (String resumo) {
-		if (resumo == null || resumo.equals("")) {
-            return true;
-        }
-        return resumo.length() > 500;
-	}
-
-	private boolean precoInvalido (float preco) {
-        return preco < 20.0;
-	}
-	
-	private boolean nPaginasInvalido (int paginas) {
-		return paginas < 100;
-	}
-
-	private boolean isbnInvalido (String isbn) {
-		return (isbn == null) || (isbn.equals(""));
-	}
-	
-	private boolean dataInvalida (LocalDate data) {
-		return data.isBefore(LocalDate.now());
-	}
-	
-	private boolean categoriaInvalida (Categoria categoria) {
-		return categoria == null;
 	}
 	
 	public String getTitulo() {
@@ -133,7 +99,5 @@ public class Livro {
 		boolean isbnIgual = this.isbn.equals(livro.isbn);
 		return tituloIgual && isbnIgual;
 	}
-	
-	
 	
 }

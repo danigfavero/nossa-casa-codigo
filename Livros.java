@@ -3,11 +3,7 @@ import java.util.Iterator;
 
 public class Livros implements Iterable<Livro> {
 	
-	public HashSet<Livro> livros;
-	
-	public Livros() {
-		this.livros = new HashSet<>();
-	}
+	public HashSet<Livro> livros = new HashSet<>();
 	
 	public void adiciona(Livro livro) {
         if (!livros.add(livro)) {
