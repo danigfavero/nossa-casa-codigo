@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import org.junit.jupiter.api.Assertions;
 
 public class Livro {
 	
@@ -16,29 +15,29 @@ public class Livro {
 	public Livro (String titulo, String resumo, String sumario, float preco,
 				  int paginas, String isbn, LocalDate data, Categoria categoria) {
 		
-		Assertions.assertNotNull(titulo,"Título inválido");
+		Assert.isNotEmpty(titulo, "Título inválido");
 		this.titulo = titulo;
 		
-		Assertions.assertNotNull(resumo,"Resumo inválido");
-		Assertions.assertTrue((resumo.length() <= 500), "Resumo inválido");
+		Assert.isNotEmpty(resumo,"Resumo inválido");
+		Assert.assertTrue((resumo.length() <= 500), "Resumo inválido");
 		this.resumo = resumo;
 		
 		this.sumario = sumario;
 		
-		Assertions.assertTrue((preco >= 20.0), "Preço inválido");
+		Assert.assertTrue((preco >= 20.0), "Preço inválido");
 		this.preco = preco;
 		
-		Assertions.assertTrue((paginas >= 100), "Número de páginas inválido");
+		Assert.assertTrue((paginas >= 100), "Número de páginas inválido");
 		this.paginas = paginas;
 		
-		Assertions.assertNotNull(isbn,"Isbn inválido");
+		Assert.isNotEmpty(isbn, "Isbn inválido");
 		this.isbn = isbn;
 		
-		Assertions.assertNotNull(data,"Data inválida");
-		Assertions.assertTrue(data.isAfter(LocalDate.now()), "Data inválida");
+		Assert.isNotEmpty(data, "Data inválida");
+		Assert.assertTrue(data.isAfter(LocalDate.now()), "Data inválida");
 		this.dataPublicacao = data;
 		
-		Assertions.assertNotNull(categoria,"Categoria inválida");
+		Assert.isNotEmpty(categoria, "Categoria inválida");
 		this.categoria = categoria;
 	}
 	
