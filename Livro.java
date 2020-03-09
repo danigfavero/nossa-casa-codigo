@@ -2,6 +2,7 @@ import java.time.LocalDate;
 
 public class Livro {
 	
+	private int id;
 	private String titulo;
 	private String resumo;
 	private String sumario;
@@ -39,6 +40,12 @@ public class Livro {
 		
 		Assert.isNotEmpty(categoria, "Categoria inválida");
 		this.categoria = categoria;
+		
+		this.id = Math.abs(this.hashCode());
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 	
 	public String getTitulo() {

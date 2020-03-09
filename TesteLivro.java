@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -38,5 +39,28 @@ public class TesteLivro {
             Assertions.assertTrue(livros.contains(outro));
 	    }
     }
+    
+    @Test
+    public void testaJson() {
+    	
+		Livros livros = new Livros();
+		StringBuilder titulo = new StringBuilder();
+		titulo.append("meu título");
+    	StringBuilder isbn = new StringBuilder();
+    	isbn.append("ISBN");
+    	
+        for (int i = 0; i < 5; i++) {
+        	titulo.append(Integer.toString(i));
+            isbn.append(Integer.toString(i));
+            Livro livro = new Livro(titulo.toString(), "um resumo", "sumário muito lindo", (float) 30, 200, isbn.toString(), LocalDate.parse("2020-12-03"), new Categoria("minha categoria"));
+            livros.adiciona(livro);
+        } 
+        
+        try {
+			livros.listaLivros();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
     
 }
