@@ -42,6 +42,19 @@ public class Livro {
 		this.categoria = categoria;
 	}
 
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public String exibeLivro() {
+		return this.titulo + "\n" +
+			   this.preco + "\n" +
+			   this.resumo + "\n" +
+			   this.sumario + "\n" +
+			   this.paginas + "\n" +
+			   this.isbn;   
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
