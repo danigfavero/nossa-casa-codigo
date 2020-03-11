@@ -1,5 +1,8 @@
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Livros implements Iterable<Livro> {
 	
@@ -20,4 +23,9 @@ public class Livros implements Iterable<Livro> {
 		return livros.contains(obj);
 	}
 	
+	public String listaLivros() throws IOException {
+		Gson gsonBuilder = new GsonBuilder().create();
+	    return gsonBuilder.toJson(livros);    
+	}
+
 }
