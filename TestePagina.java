@@ -22,10 +22,13 @@ public class TestePagina {
         Optional<Livro> optional = livros.buscaLivro("meu título0123");
         if (optional.isPresent()) {
         	Livro livroBuscado = optional.get();
-        	System.out.println(livroBuscado.exibeLivro());
+        	System.out.println(livroBuscado.getTitulo());
+        	System.out.println(livroBuscado.getTitulo().toString());
+        	System.out.println(livroBuscado.getResumo());
+        	System.out.println(livroBuscado.getSumario());
+        	System.out.println(livroBuscado.getPaginas());
+        	System.out.println(livroBuscado.getIsbn());
         }
-        
-		
 	}
 	
 }
