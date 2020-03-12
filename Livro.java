@@ -42,6 +42,30 @@ public class Livro {
 		this.categoria = categoria;
 	}
 
+	public String getTitulo() {
+		return this.titulo;
+	}
+	
+	public BigDecimal getPreco() {
+		return this.preco;
+	}
+	
+	public String getResumo() {
+		return this.resumo;
+	}
+	
+	public String getSumario() {
+		return this.sumario;
+	}
+	
+	public int getPaginas() {
+		return this.paginas;
+	}
+	
+	public String getIsbn() {
+		return this.isbn;
+	}	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
