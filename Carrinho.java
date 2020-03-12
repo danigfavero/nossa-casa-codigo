@@ -1,39 +1,52 @@
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Optional;
 
 public class Carrinho implements Iterable<Livro> {
 
-	private BigDecimal totalDoCarrinho;
-	private ArrayList<Livro> carrinho; 
-	
-	public Carrinho() {
-		totalDoCarrinho = new BigDecimal(0);
-		carrinho = new ArrayList<>();
-	}
+	private BigDecimal totalDoCarrinho = new BigDecimal(0);
+	public HashMap<Livro, Integer> carrinho = new HashMap<>();
 	
 	public boolean insere(Livros livros, String titulo) {
+	    // TODO: de que forma a inserção de livros repetidos
+	    // será implementada?
 		Optional<Livro> optional = livros.buscaLivro(titulo);
 		if (optional.isPresent()) {
 			Livro livroBuscado = optional.get();
-			carrinho.add(livroBuscado);
+			carrinho.put(livroBuscado, 1);
 			this.totalDoCarrinho =	this.totalDoCarrinho.add(livroBuscado.getPreco());
 			return true;
 		}
 		return false;
 	}
-	 
+	
+	public void edita(Livro livro, int quantidade) {
+	    // TODO: cuidado com a quantidade antiga na hora que guardar
+	    // o total do carrinho
+	    Assert.isNotEmpty(livro, "Livro inválido");
+	    Assert.assertTrue(quantidade >= 0, "Quantidade inválida");
+	    if (quantidade == 0) {
+	        carrinho.remove(livro);
+	    }
+	    carrinho.put(livro, quantidade);
+	}
+	
+	public int pegaQuantidade(Livro livro) {
+	    return carrinho.get(livro);
+	}
+	
 	@Override
     public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Item \tPreço \tQtd \tTotal\n");
-		for (Livro livro : carrinho) {
+		for (Livro livro : this) {
 			sb.append(livro.getTitulo() + "\t");
 			sb.append(livro.getPreco() + "\t");
-			sb.append("1\t");
-			sb.append(livro.getPreco().multiply(BigDecimal.ONE) + "\n");
+			int quantidade = this.pegaQuantidade(livro);
+			sb.append(quantidade + "\t");
+			sb.append(livro.getPreco().multiply(new BigDecimal(quantidade)) + "\n");
 		}
 		sb.append("TOTAL: " + this.totalDoCarrinho);
         return sb.toString();
@@ -41,7 +54,7 @@ public class Carrinho implements Iterable<Livro> {
 	 
 	@Override
 	public Iterator<Livro> iterator() {
-		return carrinho.iterator();
+		return carrinho.keySet().iterator();
 	}
 	
 	public static void main(String[] args) {
@@ -64,8 +77,9 @@ public class Carrinho implements Iterable<Livro> {
         Carrinho carrinho = new Carrinho();
         carrinho.insere(livros, "meu título0123");
         carrinho.insere(livros, "meu título012");
-        
         System.out.println(carrinho);
+        
+        // TODO: Testar edição
 	}
 	
 }
