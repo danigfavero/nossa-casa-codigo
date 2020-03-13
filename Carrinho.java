@@ -13,16 +13,11 @@ public class Carrinho implements Iterable<Livro> {
 		totalDoCarrinho = new BigDecimal(0);
 		carrinho = new ArrayList<>();
 	}
-	
-	public boolean insere(Livros livros, String titulo) {
-		Optional<Livro> optional = livros.buscaLivro(titulo);
-		if (optional.isPresent()) {
-			Livro livroBuscado = optional.get();
-			carrinho.add(livroBuscado);
-			this.totalDoCarrinho =	this.totalDoCarrinho.add(livroBuscado.getPreco());
-			return true;
-		}
-		return false;
+
+	public void insere(Livro livro) {
+		Assert.isNotEmpty(livro);
+		carrinho.add(livro);
+		this.totalDoCarrinho =	this.totalDoCarrinho.add(livro.getPreco());
 	}
 	
 	public static BigDecimal totalProduto(BigDecimal preco, int quantidade) {
@@ -40,24 +35,12 @@ public class Carrinho implements Iterable<Livro> {
 	
 	public static void main(String[] args) {
 		
-		// CRIANDO COLEÇÃO DE LIVROS
-		Livros livros = new Livros();
-		StringBuilder titulo = new StringBuilder();
-		titulo.append("meu título");
-    	StringBuilder isbn = new StringBuilder();
-    	isbn.append("ISBN");
-
-        for (int i = 0; i < 5; i++) {
-        	titulo.append(Integer.toString(i));
-            isbn.append(Integer.toString(i));
-			Livro livro = new Livro(titulo.toString(), "um resumo", "sumário muito lindo", new BigDecimal(30), 200, isbn.toString(), LocalDate.parse("2020-12-03"), new Categoria("minha categoria"));
-            livros.adiciona(livro);
-        } 	
-        
-        // TESTE DO CARRINHO
-        Carrinho carrinho = new Carrinho();
-        carrinho.insere(livros, "meu título0123");
-        carrinho.insere(livros, "meu título012");
+		Livro livro1 = new Livro("meu título", "um resumo", "sumário muito lindo", new BigDecimal(30), 200, "ISBN", LocalDate.parse("2020-12-03"), new Categoria("minha categoria"));
+		Livro livro2 = new Livro("meu título2", "um resumo", "sumário muito lindo", new BigDecimal(30), 200, "ISBN2", LocalDate.parse("2020-12-03"), new Categoria("minha categoria"));
+		
+		Carrinho carrinho = new Carrinho();
+        carrinho.insere(livro1);
+        carrinho.insere(livro2);
 		
 		for (Livro livro : carrinho) {
 			BigDecimal preco = livro.getPreco();
