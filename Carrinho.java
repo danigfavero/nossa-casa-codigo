@@ -15,6 +15,7 @@ public class Carrinho implements Iterable<Livro> {
 		this.totalDoCarrinho =	this.totalDoCarrinho.add(livro.getPreco());
 	}
 	
+		
 	public void edita(Livro livro, int quantidade) {
 	    Assert.isNotEmpty(livro, "Livro inválido");
 	    Assert.assertTrue(quantidade >= 0, "Quantidade inválida");
@@ -66,7 +67,7 @@ public class Carrinho implements Iterable<Livro> {
 		carrinho.insere(livro1);
 		carrinho.insere(livro2);
 		carrinho.edita(livro2, 3);
-		
+       
 		System.out.println("Título \tPreço \tQtd \tTotal");
 		for (Livro livro : carrinho) {
 			BigDecimal preco = livro.getPreco();
@@ -76,8 +77,7 @@ public class Carrinho implements Iterable<Livro> {
 			System.out.print(quantidade + "\t");
 			System.out.println(Carrinho.totalProduto(preco, quantidade));
 		}
-
-        System.out.println("TOTAL DA COMPRA:\t" + carrinho.getTotalDoCarrinho());   
+    COMPRA:\t" + carrinho.getTotalDoCarrinho());   
 	}
 	
 }
