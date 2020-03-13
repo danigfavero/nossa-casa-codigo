@@ -10,12 +10,10 @@ public class Carrinho implements Iterable<Livro> {
 	public HashMap<Livro, Integer> carrinho = new HashMap<>();
 	
 	public boolean insere(Livros livros, String titulo) {
-	    // TODO: de que forma a inserção de livros repetidos
-	    // será implementada?
 		Optional<Livro> optional = livros.buscaLivro(titulo);
 		if (optional.isPresent()) {
 			Livro livroBuscado = optional.get();
-			carrinho.put(livroBuscado, 1);
+			carrinho.put(livroBuscado, this.getQuantidade(livroBuscado) + 1);
 			this.totalDoCarrinho =	this.totalDoCarrinho.add(livroBuscado.getPreco());
 			return true;
 		}
@@ -23,17 +21,30 @@ public class Carrinho implements Iterable<Livro> {
 	}
 	
 	public void edita(Livro livro, int quantidade) {
-	    // TODO: cuidado com a quantidade antiga na hora que guardar
-	    // o total do carrinho
 	    Assert.isNotEmpty(livro, "Livro inválido");
 	    Assert.assertTrue(quantidade >= 0, "Quantidade inválida");
+	    
+	    int quantidadeAntiga = this.getQuantidade(livro);
 	    if (quantidade == 0) {
 	        carrinho.remove(livro);
 	    }
 	    carrinho.put(livro, quantidade);
+	    atualizaTotal(livro, quantidadeAntiga, quantidade);
+	   
 	}
 	
-	public int pegaQuantidade(Livro livro) {
+	private void atualizaTotal(Livro livro, int quantidadeAntiga, int quantidade) {
+	    BigDecimal precoAntigo = livro.getPreco().multiply(BigDecimal.valueOf(quantidadeAntiga));
+	    BigDecimal precoAtual = livro.getPreco().multiply(BigDecimal.valueOf(quantidade));
+        BigDecimal total = precoAtual.subtract(precoAntigo);
+        this.totalDoCarrinho = totalDoCarrinho.add(total);
+	}
+	
+	public int getQuantidade(Livro livro) {
+	    Assert.isNotEmpty(livro, "Livro inválido");
+	    if (carrinho.get(livro) == null) {
+	        return 0;
+	    }
 	    return carrinho.get(livro);
 	}
 	
@@ -44,7 +55,7 @@ public class Carrinho implements Iterable<Livro> {
 		for (Livro livro : this) {
 			sb.append(livro.getTitulo() + "\t");
 			sb.append(livro.getPreco() + "\t");
-			int quantidade = this.pegaQuantidade(livro);
+			int quantidade = this.getQuantidade(livro);
 			sb.append(quantidade + "\t");
 			sb.append(livro.getPreco().multiply(new BigDecimal(quantidade)) + "\n");
 		}
@@ -79,7 +90,10 @@ public class Carrinho implements Iterable<Livro> {
         carrinho.insere(livros, "meu título012");
         System.out.println(carrinho);
         
-        // TODO: Testar edição
+        carrinho.insere(livros, "meu título012"); 
+        carrinho.edita(new Livro("meu título0123", "um resumo", "sumário muito lindo", new BigDecimal(30), 200, "ISBN0123", LocalDate.parse("2020-12-03"), new Categoria("minha categoria")), 3);
+        System.out.println(carrinho);
+        
 	}
 	
 }
