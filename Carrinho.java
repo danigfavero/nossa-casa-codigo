@@ -10,9 +10,9 @@ public class Carrinho implements Iterable<Livro> {
 	public HashMap<Livro, Integer> carrinho = new HashMap<>();
 	
 	public void insere(Livro livro) {
-		Assert.isNotEmpty(livro);
-		carrinho.put(livroBuscado, this.getQuantidade(livroBuscado) + 1);
-		this.totalDoCarrinho =	this.totalDoCarrinho.add(livroBuscado.getPreco());
+		Assert.isNotEmpty(livro, "Livro inválido");
+		carrinho.put(livroBuscado, this.getQuantidade(livro) + 1);
+		this.totalDoCarrinho =	this.totalDoCarrinho.add(livro.getPreco());
 	}
 	
 	public void edita(Livro livro, int quantidade) {
@@ -67,16 +67,17 @@ public class Carrinho implements Iterable<Livro> {
 		carrinho.insere(livro2);
 		carrinho.edita(livro2, 3);
 		
+		System.out.println("Título \tPreço \tQtd \tTotal");
 		for (Livro livro : carrinho) {
 			BigDecimal preco = livro.getPreco();
 			int quantidade = 1; // por enquanto
-			System.out.println(livro.getTitulo() + "\t");
-			System.out.println(preco + "\t");
-			System.out.println(quantidade + "\t");
-			System.out.println(Carrinho.totalProduto(preco, quantidade) + "\n");
+			System.out.print(livro.getTitulo() + "\t");
+			System.out.print(preco + "\t");
+			System.out.print(quantidade + "\t");
+			System.out.println(Carrinho.totalProduto(preco, quantidade));
 		}
 
-        System.out.println(carrinho.getTotalDoCarrinho());  
+        System.out.println("TOTAL DA COMPRA:\t" + carrinho.getTotalDoCarrinho());   
 	}
 	
 }
