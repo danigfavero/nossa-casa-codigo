@@ -24,20 +24,14 @@ public class Carrinho implements Iterable<Livro> {
 		}
 		return false;
 	}
-	 
-	@Override
-    public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Item \tPreço \tQtd \tTotal\n");
-		for (Livro livro : carrinho) {
-			sb.append(livro.getTitulo() + "\t");
-			sb.append(livro.getPreco() + "\t");
-			sb.append("1\t");
-			sb.append(livro.getPreco().multiply(BigDecimal.ONE) + "\n");
-		}
-		sb.append("TOTAL: " + this.totalDoCarrinho);
-        return sb.toString();
-    }
+	
+	public static BigDecimal totalProduto(BigDecimal preco, int quantidade) {
+		return preco.multiply(new BigDecimal(quantidade));
+	}
+
+	public BigDecimal getTotalDoCarrinho() {
+		return totalDoCarrinho;
+	}
 	 
 	@Override
 	public Iterator<Livro> iterator() {
@@ -56,7 +50,7 @@ public class Carrinho implements Iterable<Livro> {
         for (int i = 0; i < 5; i++) {
         	titulo.append(Integer.toString(i));
             isbn.append(Integer.toString(i));
-            Livro livro = new Livro(titulo.toString(), "um resumo", "sumário muito lindo", new BigDecimal(30), 200, isbn.toString(), LocalDate.parse("2020-12-03"), new Categoria("minha categoria"));
+			Livro livro = new Livro(titulo.toString(), "um resumo", "sumário muito lindo", new BigDecimal(30), 200, isbn.toString(), LocalDate.parse("2020-12-03"), new Categoria("minha categoria"));
             livros.adiciona(livro);
         } 	
         
@@ -64,8 +58,17 @@ public class Carrinho implements Iterable<Livro> {
         Carrinho carrinho = new Carrinho();
         carrinho.insere(livros, "meu título0123");
         carrinho.insere(livros, "meu título012");
-        
-        System.out.println(carrinho);
+		
+		for (Livro livro : carrinho) {
+			BigDecimal preco = livro.getPreco();
+			int quantidade = 1; // por enquanto
+			System.out.println(livro.getTitulo() + "\t");
+			System.out.println(preco + "\t");
+			System.out.println(quantidade + "\t");
+			System.out.println(Carrinho.totalProduto(preco, quantidade) + "\n");
+		}
+
+        System.out.println(carrinho.getTotalDoCarrinho());
 	}
 	
 }
