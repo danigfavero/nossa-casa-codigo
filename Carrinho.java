@@ -2,37 +2,25 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Optional;
 
 public class Carrinho implements Iterable<Livro> {
 
-	private BigDecimal totalDoCarrinho = new BigDecimal(0);
 	public HashMap<Livro, Integer> carrinho = new HashMap<>();
 	
 	public void insere(Livro livro) {
-		Assert.isNotEmpty(livro);
-		carrinho.put(livroBuscado, this.getQuantidade(livroBuscado) + 1);
-		this.totalDoCarrinho =	this.totalDoCarrinho.add(livroBuscado.getPreco());
+		Assert.isNotEmpty(livro, "Livro inválido");
+		carrinho.put(livro, this.getQuantidade(livro) + 1);
 	}
 	
+		
 	public void edita(Livro livro, int quantidade) {
 	    Assert.isNotEmpty(livro, "Livro inválido");
 	    Assert.assertTrue(quantidade >= 0, "Quantidade inválida");
-	    
-	    int quantidadeAntiga = this.getQuantidade(livro);
 	    if (quantidade == 0) {
 	        carrinho.remove(livro);
 	    }
 	    carrinho.put(livro, quantidade);
-	    atualizaTotal(livro, quantidadeAntiga, quantidade);
 	   
-	}
-	
-	private void atualizaTotal(Livro livro, int quantidadeAntiga, int quantidade) {
-	    BigDecimal precoAntigo = livro.getPreco().multiply(BigDecimal.valueOf(quantidadeAntiga));
-	    BigDecimal precoAtual = livro.getPreco().multiply(BigDecimal.valueOf(quantidade));
-        BigDecimal total = precoAtual.subtract(precoAntigo);
-        this.totalDoCarrinho = totalDoCarrinho.add(total);
 	}
 	
 	public int getQuantidade(Livro livro) {
@@ -48,7 +36,12 @@ public class Carrinho implements Iterable<Livro> {
 	}
 
 	public BigDecimal getTotalDoCarrinho() {
-		return totalDoCarrinho;
+	    BigDecimal total = new BigDecimal(0);
+	    for (Livro livro : this) {
+	        BigDecimal totalParcial = totalProduto(livro.getPreco(), this.getQuantidade(livro));
+	        total = total.add(totalParcial);
+	    }
+		return total;
 	}
 	 
 	@Override
@@ -66,17 +59,17 @@ public class Carrinho implements Iterable<Livro> {
 		carrinho.insere(livro1);
 		carrinho.insere(livro2);
 		carrinho.edita(livro2, 3);
-		
+       
+		System.out.println("Título \tPreço \tQtd \tTotal");
 		for (Livro livro : carrinho) {
 			BigDecimal preco = livro.getPreco();
-			int quantidade = 1; // por enquanto
-			System.out.println(livro.getTitulo() + "\t");
-			System.out.println(preco + "\t");
-			System.out.println(quantidade + "\t");
-			System.out.println(Carrinho.totalProduto(preco, quantidade) + "\n");
+			int quantidade = carrinho.getQuantidade(livro); // por enquanto
+			System.out.print(livro.getTitulo() + "\t");
+			System.out.print(preco + "\t");
+			System.out.print(quantidade + "\t");
+			System.out.println(Carrinho.totalProduto(preco, quantidade));
 		}
-
-        System.out.println(carrinho.getTotalDoCarrinho());  
+		System.out.println("COMPRA:\t" + carrinho.getTotalDoCarrinho());   
 	}
 	
 }
