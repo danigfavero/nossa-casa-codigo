@@ -3,10 +3,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Teste {
-	
-	@Test
-	public void teste() {
-		LinkedList<Autor> autores = new Autores();
+    
+    @Test
+    public void teste() {
+        LinkedList<Autor> autores = new Autores();
         StringBuilder email = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             email.append("a");
@@ -22,12 +22,12 @@ public class Teste {
         }
 
         email = new StringBuilder();
-	    for (Autor autor : autores) {
-	    	email.append("a");
-	        Assertions.assertEquals("nome", autor.getNome());
-	        Assertions.assertEquals(email + "@email.com", autor.getEmail());
-	        Assertions.assertEquals("descrição", autor.getDescricao());
-	    }
-	}
+        for (Autor autor : autores) {
+            email.append("a");
+            Assertions.assertEquals("nome", autor.getNome());
+            Assertions.assertEquals(email + "@email.com", autor.getEmail());
+            Assertions.assertEquals("descrição", autor.getDescricao());
+        }
+    }
 
 }

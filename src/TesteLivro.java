@@ -12,20 +12,20 @@ public class TesteLivro {
     }    
     
     @Test
-	public void livroDuplicado() {
-    	Livro livro = new Livro("titulo", "resumo", "sumerio", new BigDecimal(30), 200, "isbn", LocalDate.parse("2020-12-03"), new Categoria("ux"));
+    public void livroDuplicado() {
+        Livro livro = new Livro("titulo", "resumo", "sumerio", new BigDecimal(30), 200, "isbn", LocalDate.parse("2020-12-03"), new Categoria("ux"));
         livros.adiciona(livro);
         try {
-        	Livro livro2 = new Livro("titulo", "resumo", "sumerio", new BigDecimal(30), 200, "isbn", LocalDate.parse("2020-12-03"), new Categoria("ux"));
+            Livro livro2 = new Livro("titulo", "resumo", "sumerio", new BigDecimal(30), 200, "isbn", LocalDate.parse("2020-12-03"), new Categoria("ux"));
             livros.adiciona(livro2);
         } catch (IllegalArgumentException e) {
             Assertions.assertEquals("Livro duplicado", e.getMessage());
         }
-	}
+    }
     
     @Test
     public void verificaInsercao() {
-    	StringBuilder nome = new StringBuilder();
+        StringBuilder nome = new StringBuilder();
         StringBuilder isbn = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             nome.append("a");
@@ -34,14 +34,14 @@ public class TesteLivro {
             livros.adiciona(livro);
         } 
         
-    	nome = new StringBuilder();
-    	isbn = new StringBuilder();
-    	for (int i = 0; i < 5; i++) {
-	    	nome.append("a");
+        nome = new StringBuilder();
+        isbn = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            nome.append("a");
             isbn.append("1");
             Livro outro = new Livro(nome.toString(), "resumo", "sumerio", new BigDecimal(30), 200, isbn.toString(), LocalDate.parse("2020-12-03"), new Categoria("ux"));
             Assertions.assertTrue(livros.contains(outro));
-	    }
+        }
     }
     
     

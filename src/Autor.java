@@ -44,16 +44,16 @@ public class Autor {
     }
     
     public String getNome() {
-		return this.nome;
-	  }
+        return this.nome;
+      }
 
-	  public String getEmail() {
-		  return this.email;
-	  }
+      public String getEmail() {
+          return this.email;
+      }
     
     public String getDescricao() {
-		  return this.descricao;
-	  }
+          return this.descricao;
+      }
 
     private boolean descricaoInvalida(String descricao) {
         if (descricao == null || descricao.equals("")) {
@@ -62,12 +62,12 @@ public class Autor {
         return descricao.length() > 400;
     }
 
-	@Override
-	public boolean equals(Object outroAutor) {
-		Autor autor = (Autor) outroAutor;
-		return this.getEmail().equals(autor.getEmail());
-	}
-	
+    @Override
+    public boolean equals(Object outroAutor) {
+        Autor autor = (Autor) outroAutor;
+        return this.getEmail().equals(autor.getEmail());
+    }
+    
     @Override
     public String toString() {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -78,77 +78,4 @@ public class Autor {
                + "\nCadastro feito em " + dataFormatada;
     }   
     
-    public static void main(String[] args) {
-
-        LinkedList<Autor> autores = new LinkedList<>();
-
-        try {
-            autores.add(new Autor("Joao", "joao@email.com", "formado na puc"));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("Juca", "aaaaa", "especialista"));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("Aldo", "aldo@aldo.br", "descricao longa descricao " 
-                                + "longa descricao longa descricao longa descricao longa " 
-                                + "descricao longa descricao longa descricao longa descricao longa " 
-                                + "descricao longa descricao longa descricao longa descricao longa "
-                                + "descricao longa descricao longa descricao longa descricao longa "
-                                + "descricao longa descricao longa descricao longa descricao longa "
-                                + "descricao longa descricao longa descricao longa descricao longa "
-                                + "descricao longa "));
-        } catch (IllegalArgumentException e) {
-
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("", "a@b.com", "nome vazio"));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor(null, "a@b.com", "nome nulo"));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("zé", "", "email vazio"));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("ana", null, "email nulo"));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("Descrição Nula", "a@b.com", null));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            autores.add(new Autor("Descrição Vazia", "a@b.com", ""));
-        } catch (IllegalArgumentException e) {
-        	System.out.println(e.getMessage());
-        }
-        
-
-        for (Autor autor : autores) {
-            System.out.println(autor);
-        }
-        
-    }
-
 }
