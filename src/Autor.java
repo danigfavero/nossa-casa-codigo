@@ -61,18 +61,6 @@ public class Autor {
         }
         return descricao.length() > 400;
     }
-    
-    public String getNome() {
-		return this.nome;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-    
-    public String getDescricao() {
-		return this.descricao;
-	}
 
 	@Override
 	public boolean equals(Object outroAutor) {
@@ -153,6 +141,9 @@ public class Autor {
         try {
             autores.add(new Autor("Descrição Vazia", "a@b.com", ""));
         } catch (IllegalArgumentException e) {
+        	System.out.println(e.getMessage());
+        }
+        
 
         for (Autor autor : autores) {
             System.out.println(autor);

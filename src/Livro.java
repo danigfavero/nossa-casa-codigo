@@ -65,7 +65,7 @@ public class Livro {
 	public String getIsbn() {
 		return this.isbn;
 	}	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

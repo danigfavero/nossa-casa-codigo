@@ -14,7 +14,7 @@ public class Carrinho implements Iterable<Item> {
         if (itemAntigo == null) {
             carrinho.put(livro.getTitulo(), new Item(livro, 1));
         } else {
-            itemAntigo.incrementaQuantidade();
+            itemAntigo.setQuantidade(itemAntigo.getQuantidade() + 1);
         } 
     }
         

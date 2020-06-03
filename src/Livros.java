@@ -42,5 +42,18 @@ public class Livros implements Iterable<Livro> {
 		}
 		return Optional.empty();
 	}
+	
+	public static void main(String[] args) {
+		LocalDate d = LocalDate.parse("2020-12-03");
+		Livro l = new Livro("o", "a", "a", new BigDecimal(300), 10000, "s", d, new Categoria("g"));
+		Livros ls = new Livros();
+		ls.adiciona(l);
+		try {
+			System.out.println(ls.listaLivros());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 
 }

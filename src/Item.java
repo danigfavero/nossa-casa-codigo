@@ -29,9 +29,5 @@ public class Item {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-
-    public void incrementaQuantidade() {
-        this.quantidade++;
-    }
     
 }
